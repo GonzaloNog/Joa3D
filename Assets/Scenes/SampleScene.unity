@@ -466,6 +466,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 6e527fa739147ed45b255fc6b714b643, type: 2}
   meshRenderer: {fileID: 106022599}
+  meshren2: {fileID: 2029495531}
   muro: {fileID: 106022597}
   col: {fileID: 142092289}
   pin: {fileID: 142092288}

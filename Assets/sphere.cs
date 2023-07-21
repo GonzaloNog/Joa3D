@@ -5,6 +5,7 @@ public class sphere : MonoBehaviour
 {
     public Material material;
     public MeshRenderer meshRenderer;
+    public MeshRenderer meshren2;
     public GameObject muro;
 
     //audio
@@ -21,16 +22,16 @@ public class sphere : MonoBehaviour
         //audio
         if (collision.gameObject.tag == "cilindro")
         {
+            Color color = new(Random.value, Random.value, Random.value);
+            meshren2.material.color = color;
             Debug.Log("cilindro");
             col.Play();
         }
         if (collision.gameObject.tag == "suelo")
         {
-            Debug.Log("suelo");
+            Debug.Log(collision.relativeVelocity);
+            pin.volume = (collision.relativeVelocity.y / 100) + 0.05f;
             pin.Play();
         }
-    }
-    private void OnCollisionExit(Collision collision)
-    {
     }
 }
