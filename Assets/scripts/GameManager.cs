@@ -5,7 +5,10 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    public UIManager UI;
     public Camera[] camList;
+    public sphere player;
+
     private void Awake()
     {
         if (instance == null)
@@ -17,11 +20,11 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
     private void Start()
     {
         //ChangeCam(0);
     }
+    public sphere GetPlayer() { return  player; }
     public void ChangeCam(int cam)
     {
         Debug.Log(cam);
@@ -31,5 +34,4 @@ public class GameManager : MonoBehaviour
         }
         camList[cam].gameObject.SetActive(true);
     }
-
 }
