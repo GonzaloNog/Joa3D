@@ -8,15 +8,23 @@ public class cylinderLogic : MonoBehaviour
     private Rigidbody rig;
     private AudioSource audiosource;
     public AudioClip[] audioclip;
+    private bool point;
     int audioplayed = 0;
     int colisionesJugador = 0;
     void Start()
     {
+        point = false;
         rig = GetComponent<Rigidbody>();
         audiosource = GetComponent<AudioSource>();
     }
     private void OnCollisionEnter(Collision collision)
     {
+        if ((collision.gameObject.CompareTag("cilindro") || collision.collider.tag == "player") && !point)
+        {
+            GameManager.instance.puntos++;
+            GameManager.instance.UI.UpdatePuntos();
+            point = true;
+        }
         if (collision.collider.tag == "player")
             colisionesJugador++;
         AudioStuffs(collision);

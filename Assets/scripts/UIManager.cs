@@ -13,15 +13,12 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-    }
-    private void Update()
-    {
-            UpdatePuntos();
+        UpdatePuntos();
     }
     public void UpdatePuntos()
     {
         puntostext = PuntosUI.GetComponent<TextMeshProUGUI>();
-        int puntos = GameManager.instance.GetPlayer().GetPuntos();
+        int puntos = GameManager.instance.puntos;
         puntostext.text = puntos.ToString();
     }
     public void MenuPrincipalBotones(string boton)

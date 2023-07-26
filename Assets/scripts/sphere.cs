@@ -7,6 +7,13 @@ public class sphere : MonoBehaviour
     public GameObject muro;
     private int puntos;
     public AudioSource pin;
+    public float StartPoint;
+    public bool move;
+
+    private void Start()
+    {
+        move = false;
+    }
 
     public void Update()
     {
@@ -24,6 +31,20 @@ public class sphere : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x - 0.05f, transform.position.y, transform.position.z);
         }
+        if (Input.GetMouseButton(0) && move)
+        {
+            // Obtener la posición del mouse en el mundo
+            Camera mainCamera = Camera.main;
+            if (mainCamera != null)
+            {
+                Vector3 mousePosition = Input.mousePosition;
+                mousePosition.z = StartPoint; // Asegurarse de que la Z esté en una posición adecuada en el mundo
+                Vector3 targetPosition = mainCamera.ScreenToWorldPoint(mousePosition);
+
+                // Mover el objeto hacia la posición del mouse
+                transform.position = targetPosition;
+            }
+        }
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -32,10 +53,7 @@ public class sphere : MonoBehaviour
             Color color = new(Random.value, Random.value, Random.value);
             collision.gameObject.GetComponent<MeshRenderer>().material.color = color;
         }
-        if (collision.gameObject.CompareTag("cilindro") && collision.gameObject.GetComponent<cylinderLogic>().GetColNum() == 0)
-        {
-            puntos++;
-        }
+
 
         if (collision.gameObject.CompareTag("suelo"))
         {
@@ -55,4 +73,13 @@ public class sphere : MonoBehaviour
         { fuerza = -fuerza; }
         return fuerza;
     }
+    private void OnMouseEnter()
+    {
+        move = true;
+    }
+    private void OnMouseExit()
+    {
+        move = false;
+    }
+
 }

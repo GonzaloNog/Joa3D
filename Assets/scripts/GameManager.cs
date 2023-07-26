@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public UIManager UI;
     public Camera[] camList;
     public sphere player;
+    public int puntos;
 
     private void Awake()
     {
@@ -22,7 +23,7 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        //ChangeCam(0);
+        puntos = 0;
     }
     public sphere GetPlayer() { return  player; }
     public void ChangeCam(int cam)
