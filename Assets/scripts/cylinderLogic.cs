@@ -8,11 +8,13 @@ public class cylinderLogic : MonoBehaviour
     private Rigidbody rig;
     private AudioSource audiosource;
     public AudioClip[] audioclip;
+
     private bool point;
     int audioplayed = 0;
     int colisionesJugador = 0;
     void Start()
     {
+        
         point = false;
         rig = GetComponent<Rigidbody>();
         audiosource = GetComponent<AudioSource>();
@@ -57,4 +59,5 @@ public class cylinderLogic : MonoBehaviour
         float fuerza = velocidad * masa;
         return fuerza;
     }
+
 }

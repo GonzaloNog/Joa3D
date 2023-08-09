@@ -7,6 +7,14 @@ public class sphere : MonoBehaviour
     public GameObject muro;
     private int puntos;
     public AudioSource pin;
+    private Vector3 saveStartPosition;
+    public Material[] skins;
+
+    public void Start()
+    {
+        saveStartPosition = this.transform.position;
+        GetComponent<MeshRenderer>().material = skins[GameManager.instance.skin];
+    }
     public void Update()
     {
         if (Input.GetKey(KeyCode.Escape))
@@ -42,5 +50,15 @@ public class sphere : MonoBehaviour
         float masa = this.GetComponent<Rigidbody>().mass;
         float fuerza = velocidad * masa;
         return fuerza;
+    }
+    private void OnColisionEnter(Collider other)
+    {
+        Debug.Log(other.tag);
+        if (other.tag == "wall")
+        {
+            this.transform.position = saveStartPosition;
+            Debug.Log("HOLA");
+        }
+            
     }
 }

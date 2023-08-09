@@ -11,9 +11,9 @@ public class MouseMove : MonoBehaviour
     {
         move = false;
     }
-    private void FixedUpdate()
+    private void LateUpdate()
     {
-        if (Input.GetMouseButton(0) && move)
+        if (Input.GetMouseButton(0) && move && !GameManager.instance.pause)
         {
             // Obtener la posición del mouse en el mundo
             Camera mainCamera = Camera.main;
@@ -31,7 +31,7 @@ public class MouseMove : MonoBehaviour
     }
     private void OnMouseOver()
     {
-        print("asd");
+
     }
     private void OnMouseEnter()
     {

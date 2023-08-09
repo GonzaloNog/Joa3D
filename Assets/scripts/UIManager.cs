@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -21,6 +20,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         UpdatePuntos();
+        slidervolumen.value = AudioListener.volume;
     }
     public void UpdatePuntos()
     {
@@ -41,6 +41,11 @@ public class UIManager : MonoBehaviour
     }
     public void Pausa()
     {
+        if (!pausaMenu.activeSelf)
+            Time.timeScale = 0;
+        else
+            Time.timeScale = 1;
         pausaMenu.SetActive(!pausaMenu.activeSelf);
+        GameManager.instance.pause = pausaMenu.activeSelf;
     }
 }
