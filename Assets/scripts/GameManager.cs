@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,6 +25,10 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         puntos = 0;
+    }
+    public void SetAudio()
+    {
+        AudioListener.volume = UI.GetAudioSlider();
     }
     public sphere GetPlayer() { return  player; }
     public void ChangeCam(int cam)

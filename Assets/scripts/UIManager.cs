@@ -8,9 +8,16 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+    public Slider slidervolumen;
     public GameObject PuntosUI;
+    public GameObject pausaMenu;
     private TextMeshProUGUI puntostext;
 
+
+    public float GetAudioSlider()
+    {
+        return slidervolumen.value;
+    }
     private void Start()
     {
         UpdatePuntos();
@@ -31,5 +38,9 @@ public class UIManager : MonoBehaviour
             case "quit":
                 break;
         }
+    }
+    public void Pausa()
+    {
+        pausaMenu.SetActive(!pausaMenu.activeSelf);
     }
 }

@@ -52,13 +52,9 @@ public class cylinderLogic : MonoBehaviour
     }
     private float ForceCalc(Collision collision)
     {
-        //Que es relativeVelocity, Vector3
-        float[] xyz = new float[] {collision.relativeVelocity.x, collision.relativeVelocity.y,collision.relativeVelocity.z};
-        float velocidad = xyz.Max();
-        float masa = collision.rigidbody.mass;
+        float velocidad = collision.relativeVelocity.magnitude;
+        float masa = this.GetComponent<Rigidbody>().mass;
         float fuerza = velocidad * masa;
-        if (fuerza < 0)
-        {fuerza *= -1;}
         return fuerza;
     }
 }

@@ -13,6 +13,7 @@ public class menuManager : MonoBehaviour
                 SceneManager.LoadScene("nivel_0");
                 break;
             case "quit":
+                Application.Quit();
                 break;
         }
     }
