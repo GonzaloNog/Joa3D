@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.EventSystems;
 public class MouseMove : MonoBehaviour
 {
     public GameObject sphere;
@@ -15,26 +15,23 @@ public class MouseMove : MonoBehaviour
     {
         if (Input.GetMouseButton(0) && move && !GameManager.instance.pause)
         {
-            // Obtener la posición del mouse en el mundo
+            // Obtener la posiciï¿½n del mouse en el mundo
             Camera mainCamera = Camera.main;
             if (mainCamera != null)
             {
                 Vector3 mousePosition = Input.mousePosition;
-                mousePosition.z = StartPoint; // Asegurarse de que la Z esté en una posición adecuada en el mundo
+                mousePosition.z = StartPoint; // Asegurarse de que la Z estï¿½ en una posiciï¿½n adecuada en el mundo
                 Vector3 targetPosition = mainCamera.ScreenToWorldPoint(mousePosition);
 
-                // Mover el objeto hacia la posición del mouse
+                // Mover el objeto hacia la posiciï¿½n del mouse
                 sphere.gameObject.transform.position = targetPosition;
                 transform.position = targetPosition;
             }
         }
     }
-    private void OnMouseOver()
-    {
-
-    }
     private void OnMouseEnter()
     {
+        if (!EventSystem.current.IsPointerOverGameObject())
         move = true;
     }
     private void OnMouseExit()

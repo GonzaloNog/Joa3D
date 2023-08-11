@@ -31,6 +31,10 @@ public class sphere : MonoBehaviour
             transform.position = new Vector3(transform.position.x - 0.05f, transform.position.y, transform.position.z);
         }
     }
+    public void Soltar()
+    {
+        this.GetComponent<Rigidbody>().useGravity = true;
+    }    
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject == muro || collision.gameObject.CompareTag("cilindro")) 
