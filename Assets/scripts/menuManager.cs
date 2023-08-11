@@ -29,19 +29,4 @@ public class menuManager : MonoBehaviour
         options.SetActive(!options.activeSelf);
         skinSelect.SetActive(!skinSelect.activeSelf);
     }
-    public void SetSkin(int skinID)
-    {
-        switch (skinID)
-        {
-            case 1:
-            
-            break;
-            case 2:
-            
-            break;
-            default:
-            print("Skin no encontrada");
-            break;
-        }
-    }
 }

@@ -13,7 +13,7 @@ public class sphere : MonoBehaviour
     public void Start()
     {
         saveStartPosition = this.transform.position;
-        GetComponent<MeshRenderer>().material = skins[GameManager.instance.skin];
+        GetComponent<MeshRenderer>().material = skins[ConfigManager.instance.skin];
     }
     public void Update()
     {

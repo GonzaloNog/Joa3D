@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public UIManager UI;
     public Camera[] camList;
-    public int skin;
     public sphere player;
     public int puntos;
     public bool pause;
@@ -27,7 +26,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         pause = false;
-        skin = 0;
         puntos = 0;
     }
     public void SetAudio()
