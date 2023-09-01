@@ -11,8 +11,13 @@ public class UIManager : MonoBehaviour
     public GameObject PuntosUI;
     public GameObject pausaMenu;
     private TextMeshProUGUI puntostext;
+    public GameObject lanzar;
+    public GameObject exitBoton;
 
-
+    public void LoadMenu()
+    {
+        SceneManager.LoadScene("menu_principal");
+    }
     public float GetAudioSlider()
     {
         return slidervolumen.value;
@@ -46,6 +51,8 @@ public class UIManager : MonoBehaviour
         else
             Time.timeScale = 1;
         pausaMenu.SetActive(!pausaMenu.activeSelf);
+        lanzar.SetActive(!pausaMenu.activeSelf);
+        exitBoton.SetActive(!exitBoton.activeSelf);
         GameManager.instance.pause = pausaMenu.activeSelf;
     }
 }
