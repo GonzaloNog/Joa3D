@@ -13,6 +13,8 @@ public class UIManager : MonoBehaviour
     private TextMeshProUGUI puntostext;
     public GameObject lanzar;
     public GameObject exitBoton;
+    public GameObject gameOverUI;
+    public GameObject[] estrellasUI;
 
     public void LoadMenu()
     {
@@ -54,5 +56,26 @@ public class UIManager : MonoBehaviour
         lanzar.SetActive(!pausaMenu.activeSelf);
         exitBoton.SetActive(!exitBoton.activeSelf);
         GameManager.instance.pause = pausaMenu.activeSelf;
+    }
+    public void GameOver(int estrellas)
+    {
+        gameOverUI.SetActive(true);
+        //StartCoroutine(ActivarEstrellas(estrellas));
+    }
+    IEnumerator ActivarEstrellas(int a)
+    {
+        print("estrellas = " + a);
+        for(int i = 0; i<estrellasUI.Length; i++)
+        {
+            print(i);
+            estrellasUI[i].SetActive(false);
+        }
+        for(int i = 0; i>a+1; i++)
+        {
+            print(i);
+            yield return new WaitForSeconds(0.5f);
+            estrellasUI[i].SetActive(true);
+        }
+        
     }
 }

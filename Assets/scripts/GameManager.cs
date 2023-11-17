@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public int puntos;
     public bool pause;
 
+
     private void Awake()
     {
         if (instance == null)
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
         pause = false;
         puntos = 0;
     }
+
     public void SetAudio()
     {
         AudioListener.volume = UI.GetAudioSlider();
@@ -35,11 +37,11 @@ public class GameManager : MonoBehaviour
     public sphere GetPlayer() { return  player; }
     public void ChangeCam(int cam)
     {
-        Debug.Log(cam);
         for(int a = 0; a < camList.Length;a++)
         {
             camList[a].gameObject.SetActive(false);
         }
         camList[cam].gameObject.SetActive(true);
     }
+
 }

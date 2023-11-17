@@ -9,11 +9,16 @@ public class sphere : MonoBehaviour
     public AudioSource pin;
     private Vector3 saveStartPosition;
     public Material[] skins;
+    public bool OutOfBounds;
+    public bool still;
+    float mag;
+    float i;
 
     public void Start()
     {
         saveStartPosition = this.transform.position;
         GetComponent<MeshRenderer>().material = skins[ConfigManager.instance.skin];
+        mag = this.GetComponent<Rigidbody>().velocity.magnitude;
     }
     public void Update()
     {
@@ -21,7 +26,7 @@ public class sphere : MonoBehaviour
         {
         }
         if (Input.GetKey(KeyCode.Space))
-        { this.GetComponent<Rigidbody>().useGravity = true; }
+        { StartCoroutine(Soltar()); }
         if (Input.GetKey(KeyCode.A))
         {
             transform.position = new Vector3(transform.position.x + 0.05f, transform.position.y, transform.position.z);
@@ -30,10 +35,14 @@ public class sphere : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x - 0.05f, transform.position.y, transform.position.z);
         }
+        if(LevelManager.instance.gameStarted) StillCheck();
+        print(mag);
     }
-    public void Soltar()
+    public IEnumerator Soltar()
     {
         this.GetComponent<Rigidbody>().useGravity = true;
+        yield return new WaitForSeconds(1);
+        LevelManager.instance.gameStarted = true;
     }    
     private void OnCollisionEnter(Collision collision)
     {
@@ -64,5 +73,25 @@ public class sphere : MonoBehaviour
             Debug.Log("HOLA");
         }
             
+    }
+    private void StillCheck()
+    {
+        bool stillCheck;
+        if (mag < 0.01) {stillCheck = true;}
+        else 
+        {
+            stillCheck = false;
+            still = false;
+        }
+        while (stillCheck == true)
+        {
+            i+= Time.deltaTime;
+            if(i >= 2)
+            {
+                still = true;
+                stillCheck = false;
+                i = 0;
+            }
+        }
     }
 }

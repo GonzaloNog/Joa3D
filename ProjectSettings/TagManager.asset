@@ -8,6 +8,7 @@ TagManager:
   - cilindro
   - suelo
   - player
+  - hamaca
   layers:
   - Default
   - TransparentFX
