@@ -5,20 +5,22 @@ using UnityEngine;
 public class sphere : MonoBehaviour
 {
     public GameObject muro;
+    [SerializeField]
     private int puntos;
     public AudioSource pin;
     private Vector3 saveStartPosition;
     public Material[] skins;
     public bool OutOfBounds;
     public bool still;
-    float mag;
-    float i;
+    public Rigidbody rb;
+    public float i;
+    private bool isGrounded;
 
     public void Start()
     {
+        i = 5;
         saveStartPosition = this.transform.position;
         GetComponent<MeshRenderer>().material = skins[ConfigManager.instance.skin];
-        mag = this.GetComponent<Rigidbody>().velocity.magnitude;
     }
     public void Update()
     {
@@ -35,8 +37,8 @@ public class sphere : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x - 0.05f, transform.position.y, transform.position.z);
         }
-        if(LevelManager.instance.gameStarted) StillCheck();
-        print(mag);
+        if (LevelManager.instance.gameStarted) IsStill();
+        if (isGrounded && IsStill()) OnGrounded(); else i = 5;
     }
     public IEnumerator Soltar()
     {
@@ -54,6 +56,17 @@ public class sphere : MonoBehaviour
             pin.volume = (ForceCalc(collision) / 100) + 0.05f;
             pin.Play();
         }
+        if (collision.gameObject.CompareTag("suelo"))
+        {
+            isGrounded = true;
+        }   
+    }
+    private void OnCollisionExit(Collision collision) 
+    {
+        if (collision.gameObject.CompareTag("suelo"))
+        {
+            isGrounded = false;
+        }  
     }
     public int GetPuntos()
     { return puntos; }
@@ -64,34 +77,15 @@ public class sphere : MonoBehaviour
         float fuerza = velocidad * masa;
         return fuerza;
     }
-    private void OnColisionEnter(Collider other)
+    private void OnGrounded()
     {
-        Debug.Log(other.tag);
-        if (other.tag == "wall")
-        {
-            this.transform.position = saveStartPosition;
-            Debug.Log("HOLA");
-        }
-            
+        i -= Time.deltaTime;
+        if (i <= 0) still = true;
     }
-    private void StillCheck()
+    public bool IsStill()
     {
-        bool stillCheck;
-        if (mag < 0.01) {stillCheck = true;}
-        else 
-        {
-            stillCheck = false;
-            still = false;
-        }
-        while (stillCheck == true)
-        {
-            i+= Time.deltaTime;
-            if(i >= 2)
-            {
-                still = true;
-                stillCheck = false;
-                i = 0;
-            }
-        }
+        if (rb.velocity.magnitude < .5) 
+        return true;
+        else return false;    
     }
 }

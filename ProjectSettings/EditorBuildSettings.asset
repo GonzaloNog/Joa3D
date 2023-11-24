@@ -9,6 +9,21 @@ EditorBuildSettings:
     path: Assets/escenas/menu_principal.unity
     guid: 5479f1d50fda1f8438665b48590e20fa
   - enabled: 1
-    path: Assets/escenas/test.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/escenas/Nivel_1.unity
+    guid: 3db62c2334e69fc41946331fa31ee0bd
+  - enabled: 1
+    path: Assets/escenas/Nivel_2.unity
+    guid: 19eedee704431e84da9224686b4fdf57
+  - enabled: 1
+    path: Assets/escenas/Nivel_3.unity
+    guid: cc4981c7e57b1c342a3bd6463a742b5f
+  - enabled: 1
+    path: Assets/escenas/Nivel_4.unity
+    guid: 9b958df9b5780234086be7ac93a54f36
+  - enabled: 1
+    path: Assets/escenas/Nivel_5.unity
+    guid: 8db7c28794afad842baa04a566cdc003
+  - enabled: 1
+    path: Assets/escenas/Nivel_6.unity
+    guid: a894945cfbdd57c43862bc5c997fdf22
   m_configObjects: {}

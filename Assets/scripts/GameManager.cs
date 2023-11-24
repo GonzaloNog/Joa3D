@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public sphere player;
     public int puntos;
     public bool pause;
+    public int currentScene;
 
 
     private void Awake()

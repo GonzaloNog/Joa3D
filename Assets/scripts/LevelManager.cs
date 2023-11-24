@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -27,10 +28,11 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(StartTurbinas());
         StartCoroutine(StartMartillos());
         player = GameManager.instance.player;
+        GameManager.instance.currentScene = SceneManager.GetActiveScene().buildIndex;
     }
     private void Update() 
     {
-        if (gameStarted) GameOverCheck();
+        if (gameStarted && !gameOver) GameOverCheck();
     }
     IEnumerator StartTurbinas()
     {
@@ -71,24 +73,13 @@ public class LevelManager : MonoBehaviour
     }
     private int Estrellas()
     {
-        int puntos = player.GetPuntos();
-        if (puntos == 0)
+        int puntos = GameManager.instance.puntos;
+        estrellas = puntos/3;
+        switch (puntos)
         {
-            estrellas = 0;
+            case 10: estrellas = 3; break;
+            case  0: estrellas = 0; break;
         }
-        else if (puntos <= 5)
-        {
-            estrellas = 1;
-        }
-        else if (puntos < 10)
-        {
-            estrellas = 2;
-        }
-        else if (puntos == 10)
-        {
-            estrellas = 3;
-        }
-        print(estrellas);
         return estrellas;
     }
 }

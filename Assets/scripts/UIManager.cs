@@ -20,6 +20,14 @@ public class UIManager : MonoBehaviour
     {
         SceneManager.LoadScene("menu_principal");
     }
+    public void LoadNextLevel()
+    {
+        SceneManager.LoadScene((GameManager.instance.currentScene + 1));
+    }
+    public void ReloadLevel()
+    {
+        SceneManager.LoadScene((GameManager.instance.currentScene));
+    }
     public float GetAudioSlider()
     {
         return slidervolumen.value;
@@ -60,22 +68,18 @@ public class UIManager : MonoBehaviour
     public void GameOver(int estrellas)
     {
         gameOverUI.SetActive(true);
-        //StartCoroutine(ActivarEstrellas(estrellas));
+        StartCoroutine(ActivarEstrellas(estrellas));
     }
     IEnumerator ActivarEstrellas(int a)
     {
-        print("estrellas = " + a);
-        for(int i = 0; i<estrellasUI.Length; i++)
+        for(int i = 0; i < estrellasUI.Length; i++)
         {
-            print(i);
             estrellasUI[i].SetActive(false);
         }
-        for(int i = 0; i>a+1; i++)
+        for(int i = 0; i < a; i++)
         {
-            print(i);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.000002f);
             estrellasUI[i].SetActive(true);
         }
-        
     }
 }
